@@ -47,7 +47,7 @@ public class ProductController : ControllerBase
         // {
         // return Ok(product);
         // }
-        var FoundProduct = await context.Products.FirstAsync(product => (product.id == ProductId));
+        var FoundProduct = await context.Products.FindAsync(ProductId);
         if (FoundProduct == null)
         {
             return NotFound();
@@ -58,7 +58,7 @@ public class ProductController : ControllerBase
     [HttpDelete("{ProductId}")]
     public async Task<ActionResult> DeleteProduct(int ProductId)
     {
-        var FoundProduct = await context.Products.FirstAsync(product => (product.id == ProductId));
+        var FoundProduct = await context.Products.FindAsync(ProductId);
         if (FoundProduct == null)
         {
             return NotFound("Existential crisis");
@@ -67,6 +67,24 @@ public class ProductController : ControllerBase
         context.Products.Remove(FoundProduct);
         await context.SaveChangesAsync();
         return Ok();
+    }
+
+    [HttpPut("{ProductId}")]
+    public async Task<ActionResult<Product>> UpdateProduct(int ProductId, Product newProduct)
+    {
+        var FoundProduct = await context.Products.FindAsync(ProductId);
+        if (FoundProduct == null)
+        {
+            return NotFound("Existential Crisis ");
+        }
+
+        FoundProduct.name = newProduct.name;
+        FoundProduct.price = newProduct.price;
+        FoundProduct.description = newProduct.description;
+        FoundProduct.imageUrl = newProduct.imageUrl;
+        await context.SaveChangesAsync();
+        return Ok();
+       
     }
 
 }
