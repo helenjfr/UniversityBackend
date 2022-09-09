@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WebApplication3.Migrations;
 using WebApplication5.Models;
+using Car = WebApplication5.Models.Car;
 
 namespace WebApplication3.Controllers;
 using Microsoft.AspNetCore.Mvc;
@@ -34,5 +35,19 @@ public class ProductController: ControllerBase
         await context.SaveChangesAsync();
         return Ok(NewProduct);
     }
-    
+
+    [HttpGet("{ProductId}")]
+    public async Task<ActionResult<Product>> GetSpecificProduct(int ProductId)
+    {
+        var ProductsFromDatabase = await context.Products.ToListAsync();
+        foreach (var product in ProductsFromDatabase)
+        {
+            if (product.id == ProductId)
+            {
+                return Ok(product);
+            }
+        }
+
+        return NotFound();
+    }
 }

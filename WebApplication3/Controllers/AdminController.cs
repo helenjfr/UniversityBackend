@@ -10,9 +10,9 @@ public class AdminController: ControllerBase
     {
         if(Username == "Mehdi2000" && Password == "1234")
         {
-            return  Ok();
+            return  Ok(true);
         }
 
-        return NotFound();
+        return NotFound(false);
     }
 }
