@@ -8,7 +8,7 @@ namespace WebApplication3
 {
     public partial class databaseContext : DbContext
     {
-        public DbSet<Car> Cars { get; set; }
+        public DbSet<Product> Products { get; set; }
         public databaseContext()
         {
         }
