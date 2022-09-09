@@ -39,15 +39,25 @@ public class ProductController: ControllerBase
     [HttpGet("{ProductId}")]
     public async Task<ActionResult<Product>> GetSpecificProduct(int ProductId)
     {
-        var ProductsFromDatabase = await context.Products.ToListAsync();
-        foreach (var product in ProductsFromDatabase)
-        {
-            if (product.id == ProductId)
+        // var ProductsFromDatabase = await context.Products.ToListAsync();
+        // foreach (var product in ProductsFromDatabase)
+        // {
+            // if (product.id == ProductId)
+            // {
+                // return Ok(product);
+            // }
+            var FoundProduct = await context.Products.FirstAsync(product => (product.id == ProductId));
+            if (FoundProduct == null)
             {
-                return Ok(product);
+                return NotFound();
             }
-        }
-
-        return NotFound();
+            else
+            {
+                return Ok(FoundProduct);
+            }
+            return NotFound();
     }
+
+        
+    
 }
