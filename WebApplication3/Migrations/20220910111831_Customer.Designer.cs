@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication3;
 
@@ -10,9 +11,10 @@ using WebApplication3;
 namespace WebApplication3.Migrations
 {
     [DbContext(typeof(databaseContext))]
-    partial class databaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220910111831_Customer")]
+    partial class Customer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.8");
@@ -21,6 +23,9 @@ namespace WebApplication3.Migrations
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("Customerid")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("address")
@@ -45,6 +50,8 @@ namespace WebApplication3.Migrations
 
                     b.HasKey("id");
 
+                    b.HasIndex("Customerid");
+
                     b.ToTable("Customers");
                 });
 
@@ -52,9 +59,6 @@ namespace WebApplication3.Migrations
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("Customerid")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("description")
@@ -74,21 +78,19 @@ namespace WebApplication3.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("Customerid");
-
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("WebApplication5.Models.Product", b =>
+            modelBuilder.Entity("WebApplication5.Models.Customer", b =>
                 {
                     b.HasOne("WebApplication5.Models.Customer", null)
-                        .WithMany("Products")
+                        .WithMany("Customers")
                         .HasForeignKey("Customerid");
                 });
 
             modelBuilder.Entity("WebApplication5.Models.Customer", b =>
                 {
-                    b.Navigation("Products");
+                    b.Navigation("Customers");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WebApplication3.Migrations;
-using WebApplication5.Models;
-using Car = WebApplication5.Models.Car;
+using WebApplication3.Models;
 
 namespace WebApplication3.Controllers;
 

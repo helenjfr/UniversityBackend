@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-namespace WebApplication5.Models;
+namespace WebApplication3.Models;
 
 public class Product
 {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using WebApplication3.Models;
 using WebApplication5.Models;
 
 namespace WebApplication3
@@ -9,6 +10,7 @@ namespace WebApplication3
     public partial class databaseContext : DbContext
     {
         public DbSet<Product> Products { get; set; }
+        public DbSet<Customer> Customers { get; set; }
         public databaseContext()
         {
         }
